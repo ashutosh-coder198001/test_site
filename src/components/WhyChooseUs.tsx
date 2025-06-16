@@ -41,6 +41,13 @@ const WhyChooseUs: React.FC = () => {
     }
   ];
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="why-choose-us" className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -97,7 +104,10 @@ const WhyChooseUs: React.FC = () => {
             <p className="text-blue-200 text-lg mb-8">
               Let's discuss how we can help you achieve your digital transformation goals.
             </p>
-            <button className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl">
+            <button 
+              onClick={scrollToContact}
+              className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl"
+            >
               <span>Get Started Today</span>
               <div className="w-2 h-2 bg-white rounded-full group-hover:scale-150 transition-transform duration-300"></div>
             </button>

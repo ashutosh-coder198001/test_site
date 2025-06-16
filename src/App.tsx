@@ -6,6 +6,9 @@ import CloudSolutionsService from './pages/services/CloudSolutionsService';
 import CybersecurityService from './pages/services/CybersecurityService';
 import NetworkInfrastructureService from './pages/services/NetworkInfrastructureService';
 import ManagedITService from './pages/services/ManagedITService';
+import DigitalMarketingService from './pages/services/DigitalMarketingService';
+import DataAnalyticsService from './pages/services/DataAnalyticsService';
+import ERPCRMService from './pages/services/ERPCRMService';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path="/services/cybersecurity" element={<CybersecurityService />} />
           <Route path="/services/network-infrastructure" element={<NetworkInfrastructureService />} />
           <Route path="/services/managed-it" element={<ManagedITService />} />
+          <Route path="/services/digital-marketing" element={<DigitalMarketingService />} />
+          <Route path="/services/data-analytics" element={<DataAnalyticsService />} />
+          <Route path="/services/erp-crm" element={<ERPCRMService />} />
         </Routes>
       </div>
     </Router>

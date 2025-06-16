@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Eye, Users } from 'lucide-react';
+import { Target, Eye, Users, Zap } from 'lucide-react';
 
 const About: React.FC = () => {
   const stats = [
@@ -59,6 +59,13 @@ const About: React.FC = () => {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Quality Driven</h3>
                   <p className="text-gray-600 text-sm">Excellence in every project we deliver</p>
+                </div>
+                <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
+                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Agile Approach</h3>
+                  <p className="text-gray-600 text-sm">Fast, flexible delivery with continuous improvement</p>
                 </div>
               </div>
             </div>

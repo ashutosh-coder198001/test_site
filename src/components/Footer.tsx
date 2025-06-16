@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white relative overflow-hidden">
+    <footer id="contact" className="bg-gray-900 text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -57,12 +57,14 @@ const Footer: React.FC = () => {
               <h4 className="text-lg font-semibold text-white mb-6">Our Services</h4>
               <ul className="space-y-3">
                 {[
-                  'Web Development',
-                  'Mobile Apps',
-                  'Cloud Solutions',
-                  'Cybersecurity',
-                  'IT Consulting',
-                  'Managed Services'
+                  'Web & Mobile App Development',
+                  'Cloud Solutions & Hosting',
+                  'Cybersecurity & Ethical Hacking',
+                  'Enterprise Network & ICT Infrastructure',
+                  'Managed IT Services & Consultancy',
+                  'Digital Marketing & SEO',
+                  'Data Analytics & Business Intelligence',
+                  'ERP & CRM Solutions'
                 ].map((service) => (
                   <li key={service}>
                     <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center group">

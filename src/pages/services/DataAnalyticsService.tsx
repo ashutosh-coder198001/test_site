@@ -1,0 +1,209 @@
+import React from 'react';
+import ServiceLayout from '../../components/ServiceLayout';
+import { Database, BarChart, TrendingUp, PieChart, CheckCircle, ArrowRight } from 'lucide-react';
+
+const DataAnalyticsService: React.FC = () => {
+  const features = [
+    {
+      icon: BarChart,
+      title: 'Data Visualization',
+      description: 'Transform complex data into clear, actionable visual insights and dashboards.'
+    },
+    {
+      icon: TrendingUp,
+      title: 'Predictive Analytics',
+      description: 'Use advanced algorithms to forecast trends and make data-driven predictions.'
+    },
+    {
+      icon: PieChart,
+      title: 'Custom Dashboards',
+      description: 'Interactive dashboards tailored to your specific business needs and KPIs.'
+    },
+    {
+      icon: Database,
+      title: 'Business Intelligence',
+      description: 'Comprehensive BI solutions to support strategic decision-making processes.'
+    }
+  ];
+
+  const services = [
+    {
+      title: 'Data Warehousing',
+      description: 'Centralized data storage and management solutions',
+      features: ['Data Integration', 'ETL Processes', 'Data Quality Management', 'Real-time Processing']
+    },
+    {
+      title: 'Advanced Analytics',
+      description: 'Machine learning and AI-powered analytics',
+      features: ['Predictive Modeling', 'Statistical Analysis', 'Pattern Recognition', 'Anomaly Detection']
+    },
+    {
+      title: 'Reporting & Visualization',
+      description: 'Interactive reports and visual analytics',
+      features: ['Custom Reports', 'Interactive Dashboards', 'Mobile Analytics', 'Automated Reporting']
+    }
+  ];
+
+  const benefits = [
+    'Data-Driven Decisions',
+    'Improved Efficiency',
+    'Cost Reduction',
+    'Revenue Growth',
+    'Risk Mitigation',
+    'Competitive Advantage',
+    'Process Optimization',
+    'Customer Insights'
+  ];
+
+  return (
+    <ServiceLayout>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-teal-900 via-cyan-800 to-blue-900 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <Database className="w-20 h-20 mx-auto mb-6 text-teal-300" />
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              Data Analytics & <span className="text-teal-300">Business Intelligence</span>
+            </h1>
+            <p className="text-xl text-teal-100 max-w-3xl mx-auto mb-8">
+              Transform your data into actionable insights with our advanced analytics and business intelligence solutions.
+            </p>
+            <button className="inline-flex items-center space-x-2 px-8 py-4 bg-teal-600 text-white rounded-full font-semibold text-lg hover:bg-teal-500 transition-all duration-300 hover:scale-105">
+              <span>Unlock Your Data</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Analytics Services</h2>
+            <p className="text-xl text-gray-600">Comprehensive data solutions for informed decision-making</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div key={feature.title} className="text-center p-6 bg-gray-50 rounded-2xl hover:shadow-lg transition-all duration-300">
+                <div className="w-16 h-16 bg-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Analytics Solutions</h2>
+            <p className="text-xl text-gray-600">End-to-end data analytics and business intelligence services</p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div key={service.title} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-all duration-300">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                <p className="text-gray-600 mb-6">{service.description}</p>
+                <div className="space-y-3">
+                  {service.features.map((feature) => (
+                    <div key={feature} className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-teal-600 flex-shrink-0" />
+                      <span className="text-gray-700 font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Why Data Analytics?</h2>
+              <p className="text-lg text-gray-600 mb-8">
+                In the data-driven economy, organizations that leverage analytics effectively gain significant 
+                competitive advantages and achieve better business outcomes.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                {benefits.map((benefit) => (
+                  <div key={benefit} className="flex items-center space-x-3">
+                    <CheckCircle className="w-5 h-5 text-teal-600 flex-shrink-0" />
+                    <span className="text-gray-700 font-medium">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-teal-100 to-cyan-100 rounded-3xl p-8">
+              <div className="text-center">
+                <div className="w-24 h-24 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <TrendingUp className="w-12 h-12 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Decision Speed Improvement</h3>
+                <div className="text-4xl font-bold text-teal-600 mb-2">5x</div>
+                <p className="text-gray-600 mb-6">
+                  Our analytics solutions help organizations make decisions 5 times faster with greater accuracy.
+                </p>
+                <div className="bg-white rounded-lg p-4">
+                  <div className="text-2xl font-bold text-teal-600 mb-2">Real-time</div>
+                  <div className="text-gray-600">Data Processing</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Technologies We Use</h2>
+            <p className="text-xl text-gray-600">Cutting-edge tools and platforms for data analytics</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {[
+              'Python', 'R', 'SQL', 'Tableau', 'Power BI', 'Apache Spark',
+              'TensorFlow', 'Pandas', 'Jupyter', 'AWS', 'Azure', 'Google Cloud'
+            ].map((tech) => (
+              <div key={tech} className="bg-white p-4 rounded-lg text-center font-semibold text-gray-700 hover:shadow-md transition-all duration-300 hover:scale-105">
+                {tech}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-teal-600 to-cyan-600 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold mb-6">Ready to Harness Your Data?</h2>
+          <p className="text-xl mb-8">
+            Let our data experts help you unlock the full potential of your data with advanced analytics solutions.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="px-8 py-4 bg-white text-teal-600 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300">
+              Get Data Assessment
+            </button>
+            <button className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-teal-600 transition-all duration-300">
+              Schedule Demo
+            </button>
+          </div>
+        </div>
+      </section>
+    </ServiceLayout>
+  );
+};
+
+export default DataAnalyticsService;
