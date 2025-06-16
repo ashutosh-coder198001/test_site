@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Globe, Cloud, Shield, Network, Settings, ArrowRight } from 'lucide-react';
 
 const Services: React.FC = () => {
@@ -8,35 +9,40 @@ const Services: React.FC = () => {
       title: 'Web & Mobile App Development',
       description: 'Full-cycle development of responsive websites, custom portals, and mobile applications tailored to business goals.',
       features: ['Responsive Design', 'Custom Portals', 'Mobile Apps', 'Progressive Web Apps'],
-      color: 'blue'
+      color: 'blue',
+      link: '/services/web-development'
     },
     {
       icon: Cloud,
       title: 'Cloud Solutions & Hosting',
       description: 'Deployment and management of scalable cloud environments—SaaS, IaaS, and PaaS models with security-first architecture.',
       features: ['SaaS Solutions', 'IaaS Management', 'PaaS Platforms', 'Cloud Migration'],
-      color: 'purple'
+      color: 'purple',
+      link: '/services/cloud-solutions'
     },
     {
       icon: Shield,
       title: 'Cybersecurity & Ethical Hacking',
       description: 'Penetration testing, vulnerability audits, firewall implementation, and managed security operations to protect digital assets.',
       features: ['Penetration Testing', 'Vulnerability Audits', 'Security Operations', 'Compliance'],
-      color: 'red'
+      color: 'red',
+      link: '/services/cybersecurity'
     },
     {
       icon: Network,
       title: 'Enterprise Network & ICT Infrastructure',
       description: 'Design and implementation of LAN/WAN, unified communication, data centers, and IT infrastructure for seamless operations.',
       features: ['Network Design', 'Data Centers', 'Unified Communications', 'Infrastructure'],
-      color: 'green'
+      color: 'green',
+      link: '/services/network-infrastructure'
     },
     {
       icon: Settings,
       title: 'Managed IT Services & Consultancy',
       description: 'On-demand tech support, IT strategy consulting, and system integration services to optimize operations and reduce IT costs.',
       features: ['24/7 Support', 'IT Strategy', 'System Integration', 'Cost Optimization'],
-      color: 'indigo'
+      color: 'indigo',
+      link: '/services/managed-it'
     }
   ];
 
@@ -91,10 +97,13 @@ const Services: React.FC = () => {
                   ))}
                 </div>
 
-                <button className={`group/btn inline-flex items-center space-x-2 text-white px-6 py-3 rounded-lg bg-gradient-to-r ${getColorClasses(service.color)} transition-all duration-300 hover:scale-105 hover:shadow-lg`}>
+                <Link
+                  to={service.link}
+                  className={`group/btn inline-flex items-center space-x-2 text-white px-6 py-3 rounded-lg bg-gradient-to-r ${getColorClasses(service.color)} transition-all duration-300 hover:scale-105 hover:shadow-lg`}
+                >
                   <span>Learn More</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                </button>
+                </Link>
               </div>
             </div>
           ))}

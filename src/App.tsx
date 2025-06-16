@@ -1,23 +1,26 @@
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Mission from './components/Mission';
-import WhyChooseUs from './components/WhyChooseUs';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import WebDevelopmentService from './pages/services/WebDevelopmentService';
+import CloudSolutionsService from './pages/services/CloudSolutionsService';
+import CybersecurityService from './pages/services/CybersecurityService';
+import NetworkInfrastructureService from './pages/services/NetworkInfrastructureService';
+import ManagedITService from './pages/services/ManagedITService';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <Hero />
-      <About />
-      <Services />
-      <Mission />
-      <WhyChooseUs />
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services/web-development" element={<WebDevelopmentService />} />
+          <Route path="/services/cloud-solutions" element={<CloudSolutionsService />} />
+          <Route path="/services/cybersecurity" element={<CybersecurityService />} />
+          <Route path="/services/network-infrastructure" element={<NetworkInfrastructureService />} />
+          <Route path="/services/managed-it" element={<ManagedITService />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
