@@ -14,12 +14,28 @@ const Header: React.FC = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    // Check if we're on the home page
+    if (window.location.pathname !== '/') {
+      // If not on home page, navigate to home first, then scroll
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+    
+    // If on home page, scroll to section
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsOpen(false);
     }
   };
+
+  const navigationItems = [
+    { name: 'About', id: 'about' },
+    { name: 'Services', id: 'services' },
+    { name: 'Mission', id: 'mission' },
+    { name: 'Why Choose Us', id: 'why-choose-us' },
+    { name: 'Contact', id: 'contact' }
+  ];
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -47,17 +63,17 @@ const Header: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex space-x-8">
-            {['About', 'Services', 'Mission', 'Why Choose Us', 'Contact'].map((item) => (
+            {navigationItems.map((item) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+                key={item.name}
+                onClick={() => scrollToSection(item.id)}
                 className={`transition-all duration-300 hover:scale-105 ${
                   isScrolled 
                     ? 'text-gray-700 hover:text-blue-600' 
                     : 'text-white hover:text-blue-300'
                 }`}
               >
-                {item}
+                {item.name}
               </button>
             ))}
           </nav>
@@ -76,13 +92,13 @@ const Header: React.FC = () => {
 
         {isOpen && (
           <div className="md:hidden bg-white/95 backdrop-blur-lg rounded-lg mt-2 p-4 shadow-lg">
-            {['About', 'Services', 'Mission', 'Why Choose Us', 'Contact'].map((item) => (
+            {navigationItems.map((item) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+                key={item.name}
+                onClick={() => scrollToSection(item.id)}
                 className="block w-full text-left py-3 text-gray-700 hover:text-blue-600 transition-colors duration-300"
               >
-                {item}
+                {item.name}
               </button>
             ))}
           </div>
