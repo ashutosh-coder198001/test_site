@@ -47,7 +47,7 @@ const Header: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex space-x-8">
-            {['About', 'Services', 'Mission', 'Why Choose Us'].map((item) => (
+            {['About', 'Services', 'Mission', 'Why Choose Us', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
 
         {isOpen && (
           <div className="md:hidden bg-white/95 backdrop-blur-lg rounded-lg mt-2 p-4 shadow-lg">
-            {['About', 'Services', 'Mission', 'Why Choose Us'].map((item) => (
+            {['About', 'Services', 'Mission', 'Why Choose Us', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}

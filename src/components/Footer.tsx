@@ -62,9 +62,7 @@ const Footer: React.FC = () => {
                   'Cybersecurity & Ethical Hacking',
                   'Enterprise Network & ICT Infrastructure',
                   'Managed IT Services & Consultancy',
-                  'Digital Marketing & SEO',
-                  'Data Analytics & Business Intelligence',
-                  'ERP & CRM Solutions'
+                  'Data Analytics & ERP/CRM Solutions'
                 ].map((service) => (
                   <li key={service}>
                     <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center group">

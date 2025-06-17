@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Globe, Cloud, Shield, Network, Settings, ArrowRight, Smartphone, Database, BarChart } from 'lucide-react';
+import { Globe, Cloud, Shield, Network, Settings, ArrowRight, Database } from 'lucide-react';
 
 const Services: React.FC = () => {
   const services = [
@@ -45,28 +45,12 @@ const Services: React.FC = () => {
       link: '/services/managed-it'
     },
     {
-      icon: Smartphone,
-      title: 'Digital Marketing & SEO',
-      description: 'Comprehensive digital marketing strategies, SEO optimization, and online presence management to boost your business visibility.',
-      features: ['SEO Optimization', 'Social Media Marketing', 'Content Strategy', 'Analytics & Reporting'],
-      color: 'pink',
-      link: '/services/digital-marketing'
-    },
-    {
       icon: Database,
-      title: 'Data Analytics & Business Intelligence',
-      description: 'Transform your data into actionable insights with advanced analytics, reporting, and business intelligence solutions.',
-      features: ['Data Visualization', 'Predictive Analytics', 'Custom Dashboards', 'Business Intelligence'],
+      title: 'Data Analytics & ERP/CRM Solutions',
+      description: 'Transform data into insights with advanced analytics and streamline business processes with custom ERP and CRM systems.',
+      features: ['Business Intelligence', 'Data Visualization', 'ERP Systems', 'CRM Implementation'],
       color: 'teal',
-      link: '/services/data-analytics'
-    },
-    {
-      icon: BarChart,
-      title: 'ERP & CRM Solutions',
-      description: 'Streamline your business processes with custom ERP and CRM systems designed to improve efficiency and customer relationships.',
-      features: ['Custom ERP Systems', 'CRM Implementation', 'Process Automation', 'Integration Services'],
-      color: 'orange',
-      link: '/services/erp-crm'
+      link: '/services/data-analytics-erp-crm'
     }
   ];
 
@@ -77,9 +61,7 @@ const Services: React.FC = () => {
       red: 'from-red-500 to-red-600 hover:from-red-600 hover:to-red-700',
       green: 'from-green-500 to-green-600 hover:from-green-600 hover:to-green-700',
       indigo: 'from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700',
-      pink: 'from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700',
-      teal: 'from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700',
-      orange: 'from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700'
+      teal: 'from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700'
     };
     return colors[color as keyof typeof colors];
   };
