@@ -1,8 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Shield, Globe, Mail, Phone, MapPin, Linkedin, Twitter, Github } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+
+  const services = [
+    { name: 'Web & Mobile App Development', path: '/services/web-development' },
+    { name: 'Cloud Solutions & Hosting', path: '/services/cloud-solutions' },
+    { name: 'Cybersecurity & Ethical Hacking', path: '/services/cybersecurity' },
+    { name: 'Enterprise Network & ICT Infrastructure', path: '/services/network-infrastructure' },
+    { name: 'Managed IT Services & Consultancy', path: '/services/managed-it' },
+    { name: 'Data Analytics & ERP/CRM Solutions', path: '/services/data-analytics-erp-crm' }
+  ];
 
   return (
     <footer id="contact" className="bg-gray-900 text-white relative overflow-hidden">
@@ -19,13 +29,13 @@ const Footer: React.FC = () => {
           <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
-              <div className="flex items-center space-x-3 mb-6">
+              <div className="flex items-center space-x-3 mb-6 group">
                 <div className="relative">
-                  <Shield className="w-10 h-10 text-blue-400" />
+                  <Shield className="w-10 h-10 text-blue-400 group-hover:rotate-12 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-blue-400/20 rounded-full animate-pulse"></div>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white">Digitiq Technologies</h3>
+                  <h3 className="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">Digitiq Technologies</h3>
                   <p className="text-blue-300 text-sm">OPC Private Limited</p>
                 </div>
               </div>
@@ -43,10 +53,10 @@ const Footer: React.FC = () => {
                   <a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-all duration-300 hover:scale-110"
+                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-all duration-300 hover:scale-110 hover:rotate-6 group"
                     aria-label={social.label}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                   </a>
                 ))}
               </div>
@@ -56,19 +66,15 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="text-lg font-semibold text-white mb-6">Our Services</h4>
               <ul className="space-y-3">
-                {[
-                  'Web & Mobile App Development',
-                  'Cloud Solutions & Hosting',
-                  'Cybersecurity & Ethical Hacking',
-                  'Enterprise Network & ICT Infrastructure',
-                  'Managed IT Services & Consultancy',
-                  'Data Analytics & ERP/CRM Solutions'
-                ].map((service) => (
-                  <li key={service}>
-                    <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+                {services.map((service) => (
+                  <li key={service.name}>
+                    <Link 
+                      to={service.path} 
+                      className="text-gray-400 hover:text-blue-400 transition-all duration-300 flex items-center group hover:translate-x-2"
+                    >
                       <div className="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:scale-150 transition-transform duration-300"></div>
-                      {service}
-                    </a>
+                      <span className="group-hover:font-medium transition-all duration-300">{service.name}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -78,22 +84,22 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="text-lg font-semibold text-white mb-6">Contact Us</h4>
               <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <MapPin className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
-                  <p className="text-gray-400 text-sm">
+                <div className="flex items-start space-x-3 group">
+                  <MapPin className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
                     Digital Hub, Technology Park<br />
                     Bangalore, Karnataka<br />
                     India - 560001
                   </p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                <div className="flex items-center space-x-3 group">
+                  <Phone className="w-5 h-5 text-blue-400 flex-shrink-0 group-hover:rotate-12 transition-transform duration-300" />
                   <a href="tel:+911234567890" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
                     +91 12345 67890
                   </a>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                <div className="flex items-center space-x-3 group">
+                  <Mail className="w-5 h-5 text-blue-400 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                   <a href="mailto:info@digitiqtech.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
                     info@digitiqtech.com
                   </a>
@@ -111,9 +117,15 @@ const Footer: React.FC = () => {
                 © {currentYear} Digitiq Technologies (OPC) Private Limited. All rights reserved.
               </p>
               <div className="flex space-x-6 text-sm">
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">Privacy Policy</a>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">Terms of Service</a>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">Cookie Policy</a>
+                <Link to="/privacy-policy" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-105">
+                  Privacy Policy
+                </Link>
+                <Link to="/terms-of-service" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-105">
+                  Terms of Service
+                </Link>
+                <Link to="/cookie-policy" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-105">
+                  Cookie Policy
+                </Link>
               </div>
             </div>
           </div>

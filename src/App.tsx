@@ -7,6 +7,9 @@ import CybersecurityService from './pages/services/CybersecurityService';
 import NetworkInfrastructureService from './pages/services/NetworkInfrastructureService';
 import ManagedITService from './pages/services/ManagedITService';
 import DataAnalyticsERPCRMService from './pages/services/DataAnalyticsERPCRMService';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import CookiePolicy from './pages/CookiePolicy';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
           <Route path="/services/network-infrastructure" element={<NetworkInfrastructureService />} />
           <Route path="/services/managed-it" element={<ManagedITService />} />
           <Route path="/services/data-analytics-erp-crm" element={<DataAnalyticsERPCRMService />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
         </Routes>
       </div>
     </Router>

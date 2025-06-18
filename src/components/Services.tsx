@@ -67,51 +67,52 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section id="services" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 particles">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            What <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">We Do</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-fade-in-up">
+            What <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-shimmer">We Do</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up delay-200">
             We specialize in a broad spectrum of ICT and digital transformation services
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mt-8"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mt-8 animate-scale-pulse delay-300"></div>
         </div>
 
         <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden hover-lift animate-fade-in-up"
+              style={{ animationDelay: `${400 + index * 100}ms` }}
             >
               <div className={`p-8 bg-gradient-to-r ${getColorClasses(service.color)} text-white relative overflow-hidden`}>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12 group-hover:scale-125 transition-transform duration-700"></div>
                 <div className="relative z-10">
-                  <service.icon className="w-12 h-12 mb-4" />
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <service.icon className="w-12 h-12 mb-4 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500" />
+                  <h3 className="text-xl font-bold mb-2 group-hover:scale-105 transition-transform duration-300">{service.title}</h3>
                 </div>
               </div>
               
               <div className="p-8">
-                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+                <p className="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">{service.description}</p>
                 
                 <div className="space-y-3 mb-6">
                   {service.features.map((feature, featureIndex) => (
-                    <div key={feature} className="flex items-center space-x-3">
-                      <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${getColorClasses(service.color)}`}></div>
-                      <span className="text-gray-700 text-sm font-medium">{feature}</span>
+                    <div key={feature} className="flex items-center space-x-3 group/feature">
+                      <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${getColorClasses(service.color)} group-hover/feature:scale-150 transition-transform duration-300`}></div>
+                      <span className="text-gray-700 text-sm font-medium group-hover/feature:translate-x-1 transition-transform duration-300">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 <Link
                   to={service.link}
-                  className={`group/btn inline-flex items-center space-x-2 text-white px-6 py-3 rounded-lg bg-gradient-to-r ${getColorClasses(service.color)} transition-all duration-300 hover:scale-105 hover:shadow-lg`}
+                  className={`group/btn inline-flex items-center space-x-2 text-white px-6 py-3 rounded-lg bg-gradient-to-r ${getColorClasses(service.color)} transition-all duration-300 hover:scale-105 hover:shadow-lg glow`}
                 >
                   <span>Learn More</span>
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:scale-110 transition-all duration-300" />
                 </Link>
               </div>
             </div>

@@ -43,13 +43,13 @@ const Header: React.FC = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('hero')}>
             <div className="relative">
-              <Shield className="w-8 h-8 text-blue-600" />
-              <div className="absolute inset-0 bg-blue-600/20 rounded-full animate-pulse"></div>
+              <Shield className="w-8 h-8 text-blue-600 group-hover:rotate-12 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-blue-600/20 rounded-full animate-pulse group-hover:animate-spin"></div>
             </div>
             <div>
-              <h1 className={`text-xl font-bold transition-colors duration-300 ${
+              <h1 className={`text-xl font-bold transition-all duration-300 group-hover:scale-105 ${
                 isScrolled ? 'text-gray-900' : 'text-white'
               }`}>
                 Digitiq Technologies
@@ -67,36 +67,37 @@ const Header: React.FC = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.id)}
-                className={`transition-all duration-300 hover:scale-105 ${
+                className={`relative transition-all duration-300 hover:scale-105 group ${
                   isScrolled 
                     ? 'text-gray-700 hover:text-blue-600' 
                     : 'text-white hover:text-blue-300'
                 }`}
               >
-                {item.name}
+                <span className="relative z-10">{item.name}</span>
+                <div className="absolute inset-0 bg-blue-600/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
               </button>
             ))}
           </nav>
 
           <button
-            className="md:hidden"
+            className="md:hidden group"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? (
-              <X className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
+              <X className={`w-6 h-6 group-hover:rotate-90 transition-transform duration-300 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
             ) : (
-              <Menu className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
+              <Menu className={`w-6 h-6 group-hover:scale-110 transition-transform duration-300 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
             )}
           </button>
         </div>
 
         {isOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-lg rounded-lg mt-2 p-4 shadow-lg">
+          <div className="md:hidden bg-white/95 backdrop-blur-lg rounded-lg mt-2 p-4 shadow-lg animate-fade-in-up">
             {navigationItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-3 text-gray-700 hover:text-blue-600 transition-colors duration-300"
+                className="block w-full text-left py-3 text-gray-700 hover:text-blue-600 transition-all duration-300 hover:translate-x-2 hover:font-medium"
               >
                 {item.name}
               </button>
