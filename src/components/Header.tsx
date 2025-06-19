@@ -57,7 +57,7 @@ const Header: React.FC = () => {
               <p className={`text-xs transition-colors duration-300 ${
                 isScrolled ? 'text-gray-600' : 'text-blue-200'
               }`}>
-                OPC Private Limited
+                (OPC)
               </p>
             </div>
           </div>

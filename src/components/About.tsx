@@ -21,7 +21,7 @@ const About: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
           <div className="space-y-6 animate-fade-in-up delay-300">
             <p className="text-lg text-gray-700 leading-relaxed">
-              Digitiq Technologies (OPC) Private Limited is a dynamic technology company committed to 
+              Digitiq Technologies (OPC) is a dynamic technology company committed to 
               delivering integrated, intelligent, and secure digital solutions for modern enterprises.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">

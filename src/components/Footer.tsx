@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">Digitiq Technologies</h3>
-                  <p className="text-blue-300 text-sm">OPC Private Limited</p>
+                  <p className="text-blue-300 text-sm">(OPC)</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed max-w-md">
@@ -94,8 +94,8 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-3 group">
                   <Phone className="w-5 h-5 text-blue-400 flex-shrink-0 group-hover:rotate-12 transition-transform duration-300" />
-                  <a href="tel:+911234567890" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                    +91 12345 67890
+                  <a href="tel:+919899213865" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                    +91 98992 13865
                   </a>
                 </div>
                 <div className="flex items-center space-x-3 group">
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="text-gray-400 text-sm">
-                © {currentYear} Digitiq Technologies (OPC) Private Limited. All rights reserved.
+                © {currentYear} Digitiq Technologies (OPC). All rights reserved.
               </p>
               <div className="flex space-x-6 text-sm">
                 <Link to="/privacy-policy" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-105">
