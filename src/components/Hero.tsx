@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
             </span>
           </h1>
           <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-lg rounded-full border border-white/20 mb-6">
-            <p className="text-blue-200 text-lg font-medium">OPC Private Limited</p>
+            <p className="text-blue-200 text-lg font-medium">OPC</p>
           </div>
         </div>
 
