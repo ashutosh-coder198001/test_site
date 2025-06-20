@@ -156,7 +156,7 @@ const ManagedITService: React.FC = () => {
                   <Headphones className="w-12 h-12 text-white group-hover:rotate-12 transition-transform duration-300" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Average Response Time</h3>
-                <div className="text-4xl font-bold text-indigo-600 mb-2"><15min</div>
+                <div className="text-4xl font-bold text-indigo-600 mb-2">&lt;15min</div>
                 <p className="text-gray-600 mb-6">
                   Our dedicated support team ensures rapid response to all your IT issues and requests.
                 </p>
