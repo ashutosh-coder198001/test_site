@@ -158,7 +158,7 @@ const CybersecurityService: React.FC = () => {
               <div className="text-red-100">Threat Detection Rate</div>
             </div>
             <div className="animate-fade-in-up delay-200">
-              <div className="text-4xl font-bold mb-2">&lt;5min</div>
+              <div className="text-4xl font-bold mb-2"><5min</div>
               <div className="text-red-100">Average Response Time</div>
             </div>
             <div className="animate-fade-in-up delay-400">

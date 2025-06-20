@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ServiceLayout from '../components/ServiceLayout';
 import { Cookie, Settings, Eye, Shield } from 'lucide-react';
 
 const CookiePolicy: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <ServiceLayout>
       {/* Hero Section */}
@@ -254,16 +258,16 @@ const CookiePolicy: React.FC = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
-                  href="mailto:privacy@digitiqtech.com" 
+                  href="mailto:info@digitiqtechnologies.com" 
                   className="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-500 transition-colors duration-300"
                 >
-                  Email: privacy@digitiqtech.com
+                  Email: info@digitiqtechnologies.com
                 </a>
                 <a 
-                  href="tel:+911234567890" 
+                  href="tel:+919899213865" 
                   className="px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300"
                 >
-                  Phone: +91 12345 67890
+                  Phone: +91 98992 13865
                 </a>
               </div>
             </div>

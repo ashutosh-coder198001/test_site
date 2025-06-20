@@ -29,12 +29,27 @@ const Header: React.FC = () => {
     }
   };
 
+  const scrollToContact = () => {
+    // Check if we're on the home page
+    if (window.location.pathname !== '/') {
+      // If not on home page, navigate to home first, then scroll to contact form
+      window.location.href = '/#contact-form';
+      return;
+    }
+    
+    // If on home page, scroll to contact form section
+    const element = document.getElementById('contact-form');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsOpen(false);
+    }
+  };
+
   const navigationItems = [
     { name: 'About', id: 'about' },
     { name: 'Services', id: 'services' },
     { name: 'Mission', id: 'mission' },
-    { name: 'Why Choose Us', id: 'why-choose-us' },
-    { name: 'Contact', id: 'contact' }
+    { name: 'Why Choose Us', id: 'why-choose-us' }
   ];
 
   return (
@@ -62,7 +77,7 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 items-center">
             {navigationItems.map((item) => (
               <button
                 key={item.name}
@@ -77,6 +92,16 @@ const Header: React.FC = () => {
                 <div className="absolute inset-0 bg-blue-600/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
               </button>
             ))}
+            <button
+              onClick={scrollToContact}
+              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
+                isScrolled
+                  ? 'bg-blue-600 text-white hover:bg-blue-700'
+                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
+              }`}
+            >
+              Contact
+            </button>
           </nav>
 
           <button
@@ -102,6 +127,12 @@ const Header: React.FC = () => {
                 {item.name}
               </button>
             ))}
+            <button
+              onClick={scrollToContact}
+              className="block w-full text-left py-3 text-gray-700 hover:text-blue-600 transition-all duration-300 hover:translate-x-2 hover:font-medium"
+            >
+              Contact
+            </button>
           </div>
         )}
       </div>

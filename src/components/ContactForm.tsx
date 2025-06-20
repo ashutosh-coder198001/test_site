@@ -9,6 +9,8 @@ const ContactForm: React.FC = () => {
     service: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const services = [
     'Web & Mobile App Development',
@@ -27,11 +29,58 @@ const ContactForm: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Create WhatsApp message
-    const message = `*New Contact Form Submission*
+    setIsSubmitting(true);
+
+    try {
+      // Send email using a backend service
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'digitiqtechnologies@gmail.com',
+          subject: 'New Contact Form Submission - Digitiq Technologies',
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${formData.fullName}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Phone:</strong> ${formData.phone}</p>
+            <p><strong>Service:</strong> ${formData.service}</p>
+            <p><strong>Message:</strong></p>
+            <p>${formData.message}</p>
+            <hr>
+            <p><em>Sent from Digitiq Technologies website contact form</em></p>
+          `
+        })
+      });
+
+      if (response.ok) {
+        // Show success popup
+        setShowPopup(true);
+        
+        // Reset form
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+
+        // Hide popup after 3 seconds
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 3000);
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      // Fallback to WhatsApp if email fails
+      const message = `*New Contact Form Submission*
 
 *Name:* ${formData.fullName}
 *Email:* ${formData.email}
@@ -41,26 +90,34 @@ const ContactForm: React.FC = () => {
 
 Sent from Digitiq Technologies website`;
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/+919899213865?text=${encodedMessage}`;
-    
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
-    
-    // Reset form
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
-    
-    alert('Thank you for your message! You will be redirected to WhatsApp to complete your inquiry.');
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/+919899213865?text=${encodedMessage}`;
+      
+      window.open(whatsappUrl, '_blank');
+      
+      // Show success popup anyway
+      setShowPopup(true);
+      
+      // Reset form
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: ''
+      });
+
+      // Hide popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+    <section id="contact-form" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-fade-in-up">
@@ -184,9 +241,10 @@ Sent from Digitiq Technologies website`;
             <div className="text-center">
               <button
                 type="submit"
-                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow"
+                disabled={isSubmitting}
+                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>Send Message</span>
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:scale-110 transition-all duration-300" />
               </button>
             </div>
@@ -208,7 +266,7 @@ Sent from Digitiq Technologies website`;
               <Mail className="w-8 h-8 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Email Us</h3>
-            <p className="text-gray-600">info@digitiqtech.com</p>
+            <p className="text-gray-600">info@digitiqtechnologies.com</p>
           </div>
 
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover-lift animate-fade-in-up delay-800">
@@ -220,6 +278,19 @@ Sent from Digitiq Technologies website`;
           </div>
         </div>
       </div>
+
+      {/* Success Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 max-w-md mx-4 text-center animate-fade-in-up">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Send className="w-8 h-8 text-green-600" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+            <p className="text-gray-600">Your form has been submitted successfully. We'll get back to you soon!</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

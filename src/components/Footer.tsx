@@ -87,9 +87,9 @@ const Footer: React.FC = () => {
                 <div className="flex items-start space-x-3 group">
                   <MapPin className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                   <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
-                    Digital Hub, Technology Park<br />
-                    Bangalore, Karnataka<br />
-                    India - 560001
+                    Plot No: 2, Laxam Vihar<br />
+                    Industrial Area<br />
+                    Gurgaon – 122001
                   </p>
                 </div>
                 <div className="flex items-center space-x-3 group">
@@ -100,8 +100,8 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-3 group">
                   <Mail className="w-5 h-5 text-blue-400 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                  <a href="mailto:info@digitiqtech.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                    info@digitiqtech.com
+                  <a href="mailto:info@digitiqtechnologies.com" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                    info@digitiqtechnologies.com
                   </a>
                 </div>
               </div>

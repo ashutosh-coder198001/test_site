@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield } from 'lucide-react';
 
@@ -7,6 +7,11 @@ interface ServiceLayoutProps {
 }
 
 const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -65,9 +70,13 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
               <Link to="/cookie-policy" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-105">
                 Cookie Policy
               </Link>
-              <a href="mailto:info@digitiqtech.com" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-105">
+              <a href="mailto:info@digitiqtechnologies.com" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-105">
                 Contact Us
               </a>
+            </div>
+            <div className="mt-6 text-gray-400 text-sm">
+              <p>Plot No: 2, Laxam Vihar, Industrial Area, Gurgaon – 122001</p>
+              <p>Phone: +91 98992 13865 | Email: info@digitiqtechnologies.com</p>
             </div>
           </div>
         </div>
