@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
-import { Mail, Phone, User, MessageSquare, Send } from 'lucide-react';
+import { Mail, Phone, User, MessageSquare, Send, CheckCircle, AlertCircle } from 'lucide-react';
+
+interface FormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+}
+
+interface FormErrors {
+  [key: string]: string;
+}
 
 const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
     phone: '',
     service: '',
     message: ''
   });
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [submitError, setSubmitError] = useState('');
 
   const services = [
     'Web & Mobile App Development',
@@ -22,42 +37,91 @@ const ContactForm: React.FC = () => {
     'Other'
   ];
 
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    // Full Name validation
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
+    } else if (formData.fullName.trim().length < 2) {
+      newErrors.fullName = 'Full name must be at least 2 characters';
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.fullName.trim())) {
+      newErrors.fullName = 'Full name can only contain letters and spaces';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Phone validation
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.trim())) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+
+    // Service validation
+    if (!formData.service) {
+      newErrors.service = 'Please select a service';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    } else if (formData.message.trim().length > 1000) {
+      newErrors.message = 'Message must be less than 1000 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Clear previous errors
+    setSubmitError('');
+    
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Send email using a backend service
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          to: 'digitiqtechnologies@gmail.com',
-          subject: 'New Contact Form Submission - Digitiq Technologies',
-          html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${formData.fullName}</p>
-            <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Phone:</strong> ${formData.phone}</p>
-            <p><strong>Service:</strong> ${formData.service}</p>
-            <p><strong>Message:</strong></p>
-            <p>${formData.message}</p>
-            <hr>
-            <p><em>Sent from Digitiq Technologies website contact form</em></p>
-          `
-        })
+        body: JSON.stringify(formData)
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         // Show success popup
         setShowPopup(true);
         
@@ -70,47 +134,27 @@ const ContactForm: React.FC = () => {
           message: ''
         });
 
-        // Hide popup after 3 seconds
+        // Hide popup after 4 seconds
         setTimeout(() => {
           setShowPopup(false);
-        }, 3000);
+        }, 4000);
       } else {
-        throw new Error('Failed to send email');
+        // Handle validation errors from server
+        if (result.errors && Array.isArray(result.errors)) {
+          const serverErrors: FormErrors = {};
+          result.errors.forEach((error: any) => {
+            if (error.path) {
+              serverErrors[error.path] = error.msg;
+            }
+          });
+          setErrors(serverErrors);
+        } else {
+          setSubmitError(result.error || 'Failed to send message. Please try again.');
+        }
       }
     } catch (error) {
       console.error('Error sending email:', error);
-      // Fallback to WhatsApp if email fails
-      const message = `*New Contact Form Submission*
-
-*Name:* ${formData.fullName}
-*Email:* ${formData.email}
-*Phone:* ${formData.phone}
-*Service:* ${formData.service}
-*Message:* ${formData.message}
-
-Sent from Digitiq Technologies website`;
-
-      const encodedMessage = encodeURIComponent(message);
-      const whatsappUrl = `https://wa.me/+919899213865?text=${encodedMessage}`;
-      
-      window.open(whatsappUrl, '_blank');
-      
-      // Show success popup anyway
-      setShowPopup(true);
-      
-      // Reset form
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: ''
-      });
-
-      // Hide popup after 3 seconds
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 3000);
+      setSubmitError('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -130,6 +174,13 @@ Sent from Digitiq Technologies website`;
         </div>
 
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-in-up delay-400">
+          {submitError && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+              <p className="text-red-700">{submitError}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid md:grid-cols-2 gap-6">
               {/* Full Name */}
@@ -146,10 +197,18 @@ Sent from Digitiq Technologies website`;
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md"
+                    className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md ${
+                      errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    }`}
                     placeholder="Enter your full name"
                   />
                 </div>
+                {errors.fullName && (
+                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{errors.fullName}</span>
+                  </p>
+                )}
               </div>
 
               {/* Email */}
@@ -166,10 +225,18 @@ Sent from Digitiq Technologies website`;
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md"
+                    className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md ${
+                      errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    }`}
                     placeholder="Enter your email address"
                   />
                 </div>
+                {errors.email && (
+                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{errors.email}</span>
+                  </p>
+                )}
               </div>
             </div>
 
@@ -188,10 +255,18 @@ Sent from Digitiq Technologies website`;
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md"
+                    className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md ${
+                      errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    }`}
                     placeholder="Enter your phone number"
                   />
                 </div>
+                {errors.phone && (
+                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{errors.phone}</span>
+                  </p>
+                )}
               </div>
 
               {/* Service Selection */}
@@ -205,7 +280,9 @@ Sent from Digitiq Technologies website`;
                   value={formData.service}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white appearance-none cursor-pointer group-hover:shadow-md"
+                  className={`w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white appearance-none cursor-pointer group-hover:shadow-md ${
+                    errors.service ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                  }`}
                 >
                   <option value="">Select a service</option>
                   {services.map((service) => (
@@ -214,6 +291,12 @@ Sent from Digitiq Technologies website`;
                     </option>
                   ))}
                 </select>
+                {errors.service && (
+                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{errors.service}</span>
+                  </p>
+                )}
               </div>
             </div>
 
@@ -231,9 +314,20 @@ Sent from Digitiq Technologies website`;
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white resize-none group-hover:shadow-md"
+                  className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white resize-none group-hover:shadow-md ${
+                    errors.message ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                  }`}
                   placeholder="Tell us about your project requirements..."
                 />
+              </div>
+              {errors.message && (
+                <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                  <AlertCircle className="w-4 h-4" />
+                  <span>{errors.message}</span>
+                </p>
+              )}
+              <div className="mt-2 text-sm text-gray-500">
+                {formData.message.length}/1000 characters
               </div>
             </div>
 
@@ -242,10 +336,10 @@ Sent from Digitiq Technologies website`;
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:scale-110 transition-all duration-300" />
+                <Send className={`w-5 h-5 transition-all duration-300 ${isSubmitting ? 'animate-pulse' : 'group-hover:translate-x-1 group-hover:scale-110'}`} />
               </button>
             </div>
           </form>
@@ -273,21 +367,27 @@ Sent from Digitiq Technologies website`;
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group">
               <MessageSquare className="w-8 h-8 text-green-600 group-hover:bounce transition-transform duration-300" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">WhatsApp</h3>
-            <p className="text-gray-600">Available 24/7</p>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Visit Us</h3>
+            <p className="text-gray-600">Gurgaon, Haryana</p>
           </div>
         </div>
       </div>
 
       {/* Success Popup */}
       {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 max-w-md mx-4 text-center animate-fade-in-up">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md mx-auto text-center animate-fade-in-up shadow-2xl">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Send className="w-8 h-8 text-green-600" />
+              <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-            <p className="text-gray-600">Your form has been submitted successfully. We'll get back to you soon!</p>
+            <p className="text-gray-600 mb-4">Your form has been submitted successfully. We'll get back to you soon!</p>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
