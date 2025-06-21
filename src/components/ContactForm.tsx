@@ -22,10 +22,7 @@ const ContactForm: React.FC = () => {
     message: ''
   });
   
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [submitError, setSubmitError] = useState('');
 
   const services = [
     'Web & Mobile App Development',
@@ -97,66 +94,14 @@ const ContactForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Clear previous errors
-    setSubmitError('');
-    
     // Validate form
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        // Show success popup
-        setShowPopup(true);
-        
-        // Reset form
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          service: '',
-          message: ''
-        });
-
-        // Hide popup after 4 seconds
-        setTimeout(() => {
-          setShowPopup(false);
-        }, 4000);
-      } else {
-        // Handle validation errors from server
-        if (result.errors && Array.isArray(result.errors)) {
-          const serverErrors: FormErrors = {};
-          result.errors.forEach((error: any) => {
-            if (error.path) {
-              serverErrors[error.path] = error.msg;
-            }
-          });
-          setErrors(serverErrors);
-        } else {
-          setSubmitError(result.error || 'Failed to send message. Please try again.');
-        }
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-      setSubmitError('Network error. Please check your connection and try again.');
-    } finally {
-      setIsSubmitting(false);
+    if (validateForm()) {
+      // Form is valid but no submission functionality
+      console.log('Form data:', formData);
+      alert('Form validation passed! (No submission functionality implemented)');
     }
   };
 
@@ -174,13 +119,6 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-in-up delay-400">
-          {submitError && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
-              <p className="text-red-700">{submitError}</p>
-            </div>
-          )}
-
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid md:grid-cols-2 gap-6">
               {/* Full Name */}
@@ -335,11 +273,10 @@ const ContactForm: React.FC = () => {
             <div className="text-center">
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow"
               >
-                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                <Send className={`w-5 h-5 transition-all duration-300 ${isSubmitting ? 'animate-pulse' : 'group-hover:translate-x-1 group-hover:scale-110'}`} />
+                <span>Validate Form</span>
+                <Send className="w-5 h-5 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
               </button>
             </div>
           </form>
@@ -372,25 +309,6 @@ const ContactForm: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Success Popup */}
-      {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md mx-auto text-center animate-fade-in-up shadow-2xl">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-8 h-8 text-green-600" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-            <p className="text-gray-600 mb-4">Your form has been submitted successfully. We'll get back to you soon!</p>
-            <button
-              onClick={() => setShowPopup(false)}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
