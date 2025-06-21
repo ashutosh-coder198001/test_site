@@ -5,12 +5,12 @@ import { Globe, Cloud, Shield, Network, Settings, ArrowRight, Database } from 'l
 const Services: React.FC = () => {
   const services = [
     {
-      icon: Globe,
-      title: 'Web & Mobile App Development',
-      description: 'Full-cycle development of responsive websites, custom portals, and mobile applications tailored to business goals.',
-      features: ['Responsive Design', 'Custom Portals', 'Mobile Apps', 'Progressive Web Apps'],
-      color: 'blue',
-      link: '/services/web-development'
+      icon: Network,
+      title: 'Enterprise Network & ICT Infrastructure',
+      description: 'Design and implementation of LAN/WAN, unified communication, data centers, and IT infrastructure for seamless operations.',
+      features: ['Network Design', 'Data Centers', 'Unified Communications', 'Infrastructure'],
+      color: 'green',
+      link: '/services/network-infrastructure'
     },
     {
       icon: Cloud,
@@ -29,12 +29,12 @@ const Services: React.FC = () => {
       link: '/services/cybersecurity'
     },
     {
-      icon: Network,
-      title: 'Enterprise Network & ICT Infrastructure',
-      description: 'Design and implementation of LAN/WAN, unified communication, data centers, and IT infrastructure for seamless operations.',
-      features: ['Network Design', 'Data Centers', 'Unified Communications', 'Infrastructure'],
-      color: 'green',
-      link: '/services/network-infrastructure'
+      icon: Globe,
+      title: 'Web & Mobile App Development',
+      description: 'Full-cycle development of responsive websites, custom portals, and mobile applications tailored to business goals.',
+      features: ['Responsive Design', 'Custom Portals', 'Mobile Apps', 'Progressive Web Apps'],
+      color: 'blue',
+      link: '/services/web-development'
     },
     {
       icon: Settings,

@@ -6,10 +6,10 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const services = [
-    { name: 'Web & Mobile App Development', path: '/services/web-development' },
+    { name: 'Enterprise Network & ICT Infrastructure', path: '/services/network-infrastructure' },
     { name: 'Cloud Solutions & Hosting', path: '/services/cloud-solutions' },
     { name: 'Cybersecurity & Ethical Hacking', path: '/services/cybersecurity' },
-    { name: 'Enterprise Network & ICT Infrastructure', path: '/services/network-infrastructure' },
+    { name: 'Web & Mobile App Development', path: '/services/web-development' },
     { name: 'Managed IT Services & Consultancy', path: '/services/managed-it' },
     { name: 'Data Analytics & ERP/CRM Solutions', path: '/services/data-analytics-erp-crm' }
   ];
