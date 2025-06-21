@@ -37,20 +37,20 @@ const Services: React.FC = () => {
       link: '/services/web-development'
     },
     {
-      icon: Settings,
-      title: 'Managed IT Services & Consultancy',
-      description: 'On-demand tech support, IT strategy consulting, and system integration services to optimize operations and reduce IT costs.',
-      features: ['24/7 Support', 'IT Strategy', 'System Integration', 'Cost Optimization'],
-      color: 'indigo',
-      link: '/services/managed-it'
-    },
-    {
       icon: Database,
       title: 'Data Analytics & ERP/CRM Solutions',
       description: 'Transform data into insights with advanced analytics and streamline business processes with custom ERP and CRM systems.',
       features: ['Business Intelligence', 'Data Visualization', 'ERP Systems', 'CRM Implementation'],
       color: 'teal',
       link: '/services/data-analytics-erp-crm'
+    },
+    {
+      icon: Settings,
+      title: 'Managed IT Services & Consultancy',
+      description: 'On-demand tech support, IT strategy consulting, and system integration services to optimize operations and reduce IT costs.',
+      features: ['24/7 Support', 'IT Strategy', 'System Integration', 'Cost Optimization'],
+      color: 'indigo',
+      link: '/services/managed-it'
     }
   ];
 

@@ -10,8 +10,8 @@ const Footer: React.FC = () => {
     { name: 'Cloud Solutions & Hosting', path: '/services/cloud-solutions' },
     { name: 'Cybersecurity & Ethical Hacking', path: '/services/cybersecurity' },
     { name: 'Web & Mobile App Development', path: '/services/web-development' },
-    { name: 'Managed IT Services & Consultancy', path: '/services/managed-it' },
-    { name: 'Data Analytics & ERP/CRM Solutions', path: '/services/data-analytics-erp-crm' }
+    { name: 'Data Analytics & ERP/CRM Solutions', path: '/services/data-analytics-erp-crm' },
+    { name: 'Managed IT Services & Consultancy', path: '/services/managed-it' }
   ];
 
   return (
