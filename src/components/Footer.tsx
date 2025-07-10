@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
                 <div className="flex items-start space-x-3 group">
                   <MapPin className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                   <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
-                    Plot No: 2, Laxam Vihar<br />
+                    Plot No: 2, Laxaman Vihar<br />
                     Industrial Area<br />
                     Gurgaon – 122001
                   </p>
