@@ -75,7 +75,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
               </a>
             </div>
             <div className="mt-6 text-gray-400 text-sm">
-              <p>Plot No: 2, Laxaman Vihar, Industrial Area, Gurgaon – 122001</p>
+              <p>Plot No: 2, Laxman Vihar Industrial Area Gurgaon – 122001</p>
               <p>Phone: +91 98992 13865 | Email: info@digitiqtechnologies.com</p>
             </div>
           </div>
