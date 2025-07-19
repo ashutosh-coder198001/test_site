@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Mail, Phone, User, MessageSquare, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 interface FormData {
@@ -23,6 +24,9 @@ const ContactForm: React.FC = () => {
   });
   
   const [errors, setErrors] = useState<FormErrors>({});
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string>('');
 
   const services = [
     'Web & Mobile App Development',
@@ -34,6 +38,7 @@ const ContactForm: React.FC = () => {
     'Other'
   ];
 
+  // Enhanced validation with proper email format checking
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
@@ -46,7 +51,7 @@ const ContactForm: React.FC = () => {
       newErrors.fullName = 'Full name can only contain letters and spaces';
     }
 
-    // Email validation
+    // Email validation with proper format checking
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
@@ -56,7 +61,7 @@ const ContactForm: React.FC = () => {
     // Phone validation
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.trim())) {
+    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.trim().replace(/[\s\-\(\)]/g, ''))) {
       newErrors.phone = 'Please enter a valid phone number';
     }
 
@@ -92,16 +97,67 @@ const ContactForm: React.FC = () => {
         [name]: ''
       }));
     }
+
+    // Clear submit error when user makes changes
+    if (submitError) {
+      setSubmitError('');
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Clear previous errors
+    setSubmitError('');
+    
     // Validate form
-    if (validateForm()) {
-      // Form is valid but no submission functionality
-      console.log('Form data:', formData);
-      alert('Form validation passed! (No submission functionality implemented)');
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Initialize EmailJS if not already done
+      emailjs.init('v1v1K8Xp3-7gSwNhT');
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        'service_wzijpdf',
+        'template_zxue1kb',
+        {
+          from_name: formData.fullName,
+          from_email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+          to_name: 'Digitiq Technologies',
+        },
+        'v1v1K8Xp3-7gSwNhT'
+      );
+
+      console.log('Email sent successfully:', result);
+      
+      // Success handling
+      setLoading(false);
+      setSuccess(true);
+      
+      // Reset form
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: ''
+      });
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => setSuccess(false), 5000);
+      
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setLoading(false);
+      setSubmitError('There was an error sending your message. Please try again or contact us directly.');
     }
   };
 
@@ -119,7 +175,29 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-in-up delay-400">
-          <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Success Message */}
+          {success && (
+            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3">
+              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+              <div>
+                <h3 className="text-green-800 font-semibold">Message Sent Successfully!</h3>
+                <p className="text-green-700">Thank you for contacting us. We'll get back to you soon.</p>
+              </div>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submitError && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+              <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+              <div>
+                <h3 className="text-red-800 font-semibold">Error Sending Message</h3>
+                <p className="text-red-700">{submitError}</p>
+              </div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-8" noValidate>
             <div className="grid md:grid-cols-2 gap-6">
               {/* Full Name */}
               <div className="relative group">
@@ -135,6 +213,7 @@ const ContactForm: React.FC = () => {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
+                    aria-describedby={errors.fullName ? "fullName-error" : undefined}
                     className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md ${
                       errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-300'
                     }`}
@@ -142,7 +221,7 @@ const ContactForm: React.FC = () => {
                   />
                 </div>
                 {errors.fullName && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                  <p id="fullName-error" className="mt-2 text-sm text-red-600 flex items-center space-x-1" role="alert">
                     <AlertCircle className="w-4 h-4" />
                     <span>{errors.fullName}</span>
                   </p>
@@ -163,6 +242,7 @@ const ContactForm: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    aria-describedby={errors.email ? "email-error" : undefined}
                     className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md ${
                       errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'
                     }`}
@@ -170,7 +250,7 @@ const ContactForm: React.FC = () => {
                   />
                 </div>
                 {errors.email && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                  <p id="email-error" className="mt-2 text-sm text-red-600 flex items-center space-x-1" role="alert">
                     <AlertCircle className="w-4 h-4" />
                     <span>{errors.email}</span>
                   </p>
@@ -193,6 +273,7 @@ const ContactForm: React.FC = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     required
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
                     className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white group-hover:shadow-md ${
                       errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300'
                     }`}
@@ -200,7 +281,7 @@ const ContactForm: React.FC = () => {
                   />
                 </div>
                 {errors.phone && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                  <p id="phone-error" className="mt-2 text-sm text-red-600 flex items-center space-x-1" role="alert">
                     <AlertCircle className="w-4 h-4" />
                     <span>{errors.phone}</span>
                   </p>
@@ -218,6 +299,7 @@ const ContactForm: React.FC = () => {
                   value={formData.service}
                   onChange={handleChange}
                   required
+                  aria-describedby={errors.service ? "service-error" : undefined}
                   className={`w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white appearance-none cursor-pointer group-hover:shadow-md ${
                     errors.service ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
@@ -230,7 +312,7 @@ const ContactForm: React.FC = () => {
                   ))}
                 </select>
                 {errors.service && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                  <p id="service-error" className="mt-2 text-sm text-red-600 flex items-center space-x-1" role="alert">
                     <AlertCircle className="w-4 h-4" />
                     <span>{errors.service}</span>
                   </p>
@@ -252,6 +334,7 @@ const ContactForm: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={6}
+                  aria-describedby={errors.message ? "message-error" : undefined}
                   className={`w-full pl-12 pr-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white resize-none group-hover:shadow-md ${
                     errors.message ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
@@ -259,7 +342,7 @@ const ContactForm: React.FC = () => {
                 />
               </div>
               {errors.message && (
-                <p className="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                <p id="message-error" className="mt-2 text-sm text-red-600 flex items-center space-x-1" role="alert">
                   <AlertCircle className="w-4 h-4" />
                   <span>{errors.message}</span>
                 </p>
@@ -273,10 +356,15 @@ const ContactForm: React.FC = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow"
+                disabled={loading}
+                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:from-blue-500 hover:to-purple-500 hover:scale-105 hover:shadow-2xl transform glow disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <span>Validate Form</span>
-                <Send className="w-5 h-5 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
+                <span>{loading ? 'Sending...' : 'Send Message'}</span>
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <Send className="w-5 h-5 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
+                )}
               </button>
             </div>
           </form>
