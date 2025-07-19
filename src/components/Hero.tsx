@@ -18,13 +18,6 @@ const Hero: React.FC = () => {
         <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
-      {/* Floating Icons */}
-      <div className="absolute inset-0 overflow-hidden">
-        <Globe className="absolute top-20 right-20 w-8 h-8 text-blue-300/30 animate-bounce delay-300" />
-        <Shield className="absolute bottom-32 left-16 w-6 h-6 text-purple-300/30 animate-bounce delay-700" />
-        <Zap className="absolute top-1/3 left-20 w-10 h-10 text-pink-300/30 animate-bounce delay-1000" />
-      </div>
-
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         <div className="mb-8 transform animate-fade-in-up">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
