@@ -43,23 +43,6 @@ const Footer: React.FC = () => {
                 Delivering integrated, intelligent, and secure digital solutions for modern enterprises. 
                 Bridging the gap between technology and business in the digital age.
               </p>
-              <div className="flex space-x-4">
-                {[
-                  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                  { icon: Twitter, href: '#', label: 'Twitter' },
-                  { icon: Github, href: '#', label: 'GitHub' },
-                  { icon: Globe, href: '#', label: 'Website' }
-                ].map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-all duration-300 hover:scale-110 hover:rotate-6 group"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                  </a>
-                ))}
-              </div>
             </div>
 
             {/* Services */}
