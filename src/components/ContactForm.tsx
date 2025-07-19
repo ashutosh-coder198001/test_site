@@ -126,12 +126,11 @@ const ContactForm: React.FC = () => {
         'service_wzijpdf',
         'template_zxue1kb',
         {
-          from_name: formData.fullName,
-          from_email: formData.email,
+          fullName: formData.fullName,
+          email: formData.email,
           phone: formData.phone,
           service: formData.service,
           message: formData.message,
-          to_name: 'Digitiq Technologies',
         },
         'v1v1K8Xp3-7gSwNhT'
       );
