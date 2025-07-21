@@ -59,11 +59,12 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-500">
-                <Shield className="w-7 h-7 text-white group-hover:rotate-12 transition-transform duration-500" />
-              </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-500"></div>
+            <div className="relative group-hover:scale-110 transition-transform duration-500">
+              <img 
+                src="/upscalemedia-transformed.jpeg" 
+                alt="Digitiq Technologies Logo" 
+                className="w-12 h-12 object-contain rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-500"
+              />
             </div>
             <div>
               <h1 className={`text-xl font-bold transition-all duration-300 group-hover:scale-105 ${

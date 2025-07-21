@@ -30,11 +30,12 @@ const Footer: React.FC = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-6 group">
-                <div className="relative">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-500">
-                    <Shield className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-500" />
-                  </div>
-                  <div className="absolute -inset-1 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-500"></div>
+                <div className="relative group-hover:scale-110 transition-transform duration-500">
+                  <img 
+                    src="/upscalemedia-transformed.jpeg" 
+                    alt="Digitiq Technologies Logo" 
+                    className="w-14 h-14 object-contain rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-500"
+                  />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold group-hover:scale-105 transition-all duration-300">

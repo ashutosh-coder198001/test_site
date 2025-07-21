@@ -48,11 +48,12 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-4 group">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-500">
-                  <Shield className="w-7 h-7 text-white group-hover:rotate-12 transition-transform duration-500" />
-                </div>
-                <div className="absolute -inset-1 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-500"></div>
+              <div className="relative group-hover:scale-110 transition-transform duration-500">
+                <img 
+                  src="/upscalemedia-transformed.jpeg" 
+                  alt="Digitiq Technologies Logo" 
+                  className="w-12 h-12 object-contain rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-500"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-bold group-hover:scale-105 transition-all duration-300">
