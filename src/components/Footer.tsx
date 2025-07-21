@@ -31,11 +31,20 @@ const Footer: React.FC = () => {
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-6 group">
                 <div className="relative">
-                  <Shield className="w-10 h-10 text-blue-400 group-hover:rotate-12 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-blue-400/20 rounded-full animate-pulse"></div>
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-500">
+                    <Shield className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-500" />
+                  </div>
+                  <div className="absolute -inset-1 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-500"></div>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">Digitiq Technologies</h3>
+                  <h3 className="text-2xl font-bold group-hover:scale-105 transition-all duration-300">
+                    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-extrabold">
+                      Digitiq
+                    </span>
+                    <span className="text-white group-hover:text-blue-300 transition-colors duration-300">
+                      {' '}Technologies
+                    </span>
+                  </h3>
                   <p className="text-blue-300 text-sm">(OPC)</p>
                 </div>
               </div>
