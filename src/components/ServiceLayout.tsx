@@ -19,14 +19,11 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="relative">
-                <Shield className="w-8 h-8 text-blue-600 group-hover:rotate-12 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-blue-600/20 rounded-full animate-pulse group-hover:animate-spin"></div>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900 group-hover:scale-105 transition-transform duration-300">Digitiq Technologies</h1>
-                <p className="text-xs text-gray-600">(OPC)</p>
-              </div>
+              <img 
+                src="/upscalemedia-transformed.jpeg" 
+                alt="Digitiq Technologies Logo" 
+                className="h-10 w-auto object-contain group-hover:scale-110 transition-all duration-500"
+              />
             </Link>
 
             <Link
@@ -48,24 +45,11 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-4 group">
-              <div className="relative group-hover:scale-110 transition-transform duration-500">
-                <img 
-                  src="/upscalemedia-transformed.jpeg" 
-                  alt="Digitiq Technologies Logo" 
-                  className="w-12 h-12 object-contain rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-500"
-                />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold group-hover:scale-105 transition-all duration-300">
-                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-extrabold">
-                    Digitiq
-                  </span>
-                  <span className="text-white group-hover:text-blue-300 transition-colors duration-300">
-                    {' '}Technologies
-                  </span>
-                </h3>
-                <p className="text-blue-300 text-sm">(OPC)</p>
-              </div>
+              <img 
+                src="/upscalemedia-transformed.jpeg" 
+                alt="Digitiq Technologies Logo" 
+                className="h-12 w-auto object-contain group-hover:scale-110 transition-all duration-500"
+              />
             </div>
             <p className="text-gray-400 mb-6">
               Delivering integrated, intelligent, and secure digital solutions for modern enterprises.

@@ -30,24 +30,11 @@ const Footer: React.FC = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-6 group">
-                <div className="relative group-hover:scale-110 transition-transform duration-500">
-                  <img 
-                    src="/upscalemedia-transformed.jpeg" 
-                    alt="Digitiq Technologies Logo" 
-                    className="w-14 h-14 object-contain rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-500"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold group-hover:scale-105 transition-all duration-300">
-                    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-extrabold">
-                      Digitiq
-                    </span>
-                    <span className="text-white group-hover:text-blue-300 transition-colors duration-300">
-                      {' '}Technologies
-                    </span>
-                  </h3>
-                  <p className="text-blue-300 text-sm">(OPC)</p>
-                </div>
+                <img 
+                  src="/upscalemedia-transformed.jpeg" 
+                  alt="Digitiq Technologies Logo" 
+                  className="h-16 w-auto object-contain group-hover:scale-110 transition-all duration-500 hover:shadow-xl"
+                />
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed max-w-md">
                 Delivering integrated, intelligent, and secure digital solutions for modern enterprises. 
