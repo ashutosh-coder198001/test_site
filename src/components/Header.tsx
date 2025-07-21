@@ -60,14 +60,21 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('hero')}>
             <div className="relative">
-              <Shield className="w-8 h-8 text-blue-600 group-hover:rotate-12 transition-transform duration-500" />
-              <div className="absolute inset-0 bg-blue-600/20 rounded-full animate-pulse group-hover:animate-spin"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-500">
+                <Shield className="w-7 h-7 text-white group-hover:rotate-12 transition-transform duration-500" />
+              </div>
+              <div className="absolute -inset-1 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-500"></div>
             </div>
             <div>
               <h1 className={`text-xl font-bold transition-all duration-300 group-hover:scale-105 ${
                 isScrolled ? 'text-gray-900' : 'text-white'
               }`}>
-                Digitiq Technologies
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">
+                  Digitiq
+                </span>
+                <span className={isScrolled ? 'text-gray-900' : 'text-white'}>
+                  {' '}Technologies
+                </span>
               </h1>
               <p className={`text-xs transition-colors duration-300 ${
                 isScrolled ? 'text-gray-600' : 'text-blue-200'
