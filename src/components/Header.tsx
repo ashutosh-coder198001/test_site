@@ -59,11 +59,13 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <img 
-              src="/upscalemedia-transformed.jpeg" 
-              alt="Digitiq Technologies Logo" 
-              className="h-12 w-auto object-contain group-hover:scale-110 transition-all duration-500 hover:shadow-xl"
-            />
+            <div className="flex items-center space-x-3">
+              <img 
+                src="/upscalemedia-transformed.jpeg" 
+                alt="Digitiq Technologies Logo" 
+                className="h-14 w-auto object-contain group-hover:scale-110 transition-all duration-500 hover:shadow-xl filter drop-shadow-lg"
+              />
+            </div>
           </div>
 
           <nav className="hidden md:flex space-x-8 items-center">

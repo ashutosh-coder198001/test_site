@@ -22,7 +22,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
               <img 
                 src="/upscalemedia-transformed.jpeg" 
                 alt="Digitiq Technologies Logo" 
-                className="h-10 w-auto object-contain group-hover:scale-110 transition-all duration-500"
+                className="h-12 w-auto object-contain group-hover:scale-110 transition-all duration-500 filter drop-shadow-md"
               />
             </Link>
 
@@ -48,7 +48,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({ children }) => {
               <img 
                 src="/upscalemedia-transformed.jpeg" 
                 alt="Digitiq Technologies Logo" 
-                className="h-12 w-auto object-contain group-hover:scale-110 transition-all duration-500"
+                className="h-16 w-auto object-contain group-hover:scale-110 transition-all duration-500 filter drop-shadow-lg bg-white/10 backdrop-blur-sm rounded-lg p-2"
               />
             </div>
             <p className="text-gray-400 mb-6">

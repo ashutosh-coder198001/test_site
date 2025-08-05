@@ -20,6 +20,13 @@ const Hero: React.FC = () => {
 
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         <div className="mb-8 transform animate-fade-in-up">
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/upscalemedia-transformed.jpeg" 
+              alt="Digitiq Technologies Logo" 
+              className="h-24 w-auto object-contain filter drop-shadow-2xl"
+            />
+          </div>
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
               Digitiq Technologies
